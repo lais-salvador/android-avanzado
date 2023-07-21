@@ -5,33 +5,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android_avanzado.Model
-import com.example.android_avanzado.R
 import com.example.android_avanzado.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
-    private lateinit var binding: FragmentListBinding
-    private lateinit var adapter: ItemAdapter
+    private var _binding: FragmentListBinding? = null
+    private val binding get() = _binding!!
+
+    private  var viewModel: ListViewModel = ListViewModel()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentListBinding.inflate(layoutInflater)
-        initRecyclerView()
-        getItems()
-        return binding.root
+    ): View? = FragmentListBinding.inflate(inflater, container, false).apply { _binding = this }.root
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initList(viewModel.getData())
     }
-    private fun initRecyclerView(){
-        binding.rvItems.layoutManager = LinearLayoutManager(context)
-        adapter = ItemAdapter()
-        binding.rvItems.adapter = adapter
+
+    private fun initList(list: List<Model>) = binding.rvItems.run{
+        adapter = ListAdapter(list)
     }
-    private fun getItems(){
-        val modelList = List<Model>(10){
-            Model.dummy()
-        }
-        adapter.setItems(modelList)
-    }
+
 }
 
