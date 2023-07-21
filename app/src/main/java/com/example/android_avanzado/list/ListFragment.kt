@@ -20,7 +20,10 @@ class ListFragment : Fragment() {
     ): View? = FragmentListBinding.inflate(inflater, container, false).apply { _binding = this }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initList(viewModel.getData())
+        viewModel.dataList.observe(viewLifecycleOwner) {list ->
+            initList(list)
+        }
+        viewModel.getData()
     }
 
     private fun initList(list: List<Model>) = binding.rvItems.run{
