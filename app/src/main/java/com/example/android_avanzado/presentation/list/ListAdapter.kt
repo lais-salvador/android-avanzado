@@ -1,20 +1,20 @@
-package com.example.android_avanzado.list
+package com.example.android_avanzado.presentation.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.android_avanzado.Model
+import com.example.android_avanzado.domain.model.HeroModel
 import com.example.android_avanzado.databinding.ListItemBinding
 
 class ListAdapter(
-    private val itemList: List<Model>
+    private val itemList: List<HeroModel>
 ): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     inner class ViewHolder(private val binding: ListItemBinding): RecyclerView.ViewHolder(binding.root) {
         val tvNombre = binding.text
         val tvImage = binding.image
 
-        fun bind(item: Model){
+        fun bind(item: HeroModel){
             tvNombre.text = item.name
             Glide.with(binding.root.context)
                 .load(item.photoUrl)

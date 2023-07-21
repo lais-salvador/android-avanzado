@@ -1,18 +1,21 @@
-package com.example.android_avanzado.list
+package com.example.android_avanzado.presentation.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.android_avanzado.Model
+import androidx.fragment.app.viewModels
+import com.example.android_avanzado.domain.model.HeroModel
 import com.example.android_avanzado.databinding.FragmentListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    private  var viewModel: ListViewModel = ListViewModel()
+    private  val viewModel: ListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +29,7 @@ class ListFragment : Fragment() {
         viewModel.getData()
     }
 
-    private fun initList(list: List<Model>) = binding.rvItems.run{
+    private fun initList(list: List<HeroModel>) = binding.rvItems.run{
         adapter = ListAdapter(list)
     }
 
