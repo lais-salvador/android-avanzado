@@ -5,17 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import com.example.android_avanzado.domain.model.HeroModel
 import com.example.android_avanzado.databinding.FragmentListBinding
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class ListFragment : Fragment() {
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
-    private  val viewModel: ListViewModel by viewModels()
+    private  val listViewModel: ListViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,10 +21,10 @@ class ListFragment : Fragment() {
     ): View? = FragmentListBinding.inflate(inflater, container, false).apply { _binding = this }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.dataList.observe(viewLifecycleOwner) {list ->
+        listViewModel.dataList.observe(viewLifecycleOwner) { list ->
             initList(list)
         }
-        viewModel.getData()
+        listViewModel.getData()
     }
 
     private fun initList(list: List<HeroModel>) = binding.rvItems.run{
