@@ -5,6 +5,6 @@ import com.example.android_avanzado.presentation.list.ListViewModel
 import org.koin.dsl.module
 
 
-val appModule = module {
+val domainModule = module {
     single { GetHeroListUseCase() }
 }
