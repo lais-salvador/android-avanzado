@@ -1,7 +1,8 @@
 package com.example.android_avanzado.domain.usecase
 
+import com.example.android_avanzado.data.HeroRepository
 import com.example.android_avanzado.domain.model.HeroModel
 
-class GetHeroListUseCase {
-    fun invoke(): List<HeroModel> = List<HeroModel>(10){ HeroModel.dummy() }
+class GetHeroListUseCase (private val heroRepository: HeroRepository) {
+    suspend fun invoke(): List<HeroModel> = heroRepository.getHeroList()
 }

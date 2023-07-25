@@ -24,7 +24,16 @@ class ListFragment : Fragment() {
         listViewModel.dataList.observe(viewLifecycleOwner) { list ->
             initList(list)
         }
+        listViewModel.error.observe(viewLifecycleOwner) {message ->
+            showError(message)
+        }
+        println(listViewModel.getData())
         listViewModel.getData()
+    }
+
+    private fun showError(message: String) = binding.errorText.run{
+        text = message
+        visibility = View.VISIBLE
     }
 
     private fun initList(list: List<HeroModel>) = binding.rvItems.run{
