@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.example.android_avanzado.domain.model.HeroModel
 import com.example.android_avanzado.databinding.FragmentListBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -37,7 +38,11 @@ class ListFragment : Fragment() {
     }
 
     private fun initList(list: List<HeroModel>) = binding.rvItems.run{
-        adapter = ListAdapter(list)
+        adapter = ListAdapter(list) {model ->
+            findNavController().navigate(
+                ListFragmentDirections.actionListFragmentToDetailFragment(model.id)
+            )
+        }
     }
 
 }

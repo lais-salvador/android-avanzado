@@ -20,7 +20,7 @@ class TestDataBuilder {
         val list = mutableListOf<HeroModel>()
 
         for(i in 0 .. numElements){
-        list.add(HeroModel(name, ""))
+        list.add(HeroModel("", name, "", ""))
         }
 
         return list.toList()

@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph.xml"
-    app:startDestination="@id/ListFragment">
+    app:startDestination="@id/listFragment">
     <fragment
-        android:id="@+id/ListFragment"
+        android:id="@+id/listFragment"
         android:name="com.example.android_avanzado.presentation.list.ListFragment"
-        android:label="ListFragment"/>
+        android:label="ListFragment"
+        tools:layout="@layout/fragment_list">
+        <action android:id="@+id/action_ListFragment_to_DetailFragment"
+            app:destination="@id/detailFragment"/>
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.android_avanzado.presentation.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/item_detail" >
+        <argument
+            android:name="hero_id"
+            app:argType="string"
+            app:nullable="false"/>
+    </fragment>
 </navigation>

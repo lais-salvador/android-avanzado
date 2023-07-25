@@ -30,7 +30,9 @@ class HeroRepositoryImpl(
                 it.toHeroModel()
             }
         }
-
     }
+
+    override suspend fun getHeroDetailById(id: String): HeroModel = localDataSource.getHeroDetailById(id).toHeroModel()
+
 
 }
