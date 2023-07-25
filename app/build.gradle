@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id "kotlin-kapt"
 }
 
 android {
@@ -39,6 +40,7 @@ dependencies {
     def navigationVersion = "2.5.3"
     def koinVersion = "3.4.2"
     def retrofitVersion = "2.9.0"
+    def roomVersion = "2.5.1"
 
     //Core
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -74,4 +76,8 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:1.14.0"
     implementation "com.squareup.retrofit2:converter-moshi:${ retrofitVersion }"
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3"
+    //Room
+    implementation "androidx.room:room-runtime:${ roomVersion }"
+    implementation "androidx.room:room-ktx:${ roomVersion }"
+    kapt "androidx.room:room-compiler:${ roomVersion }"
 }

@@ -1,7 +1,13 @@
 package com.example.android_avanzado.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.android_avanzado.data.HeroRepository
 import com.example.android_avanzado.data.HeroRepositoryImpl
+import com.example.android_avanzado.data.local.HeroDao
+import com.example.android_avanzado.data.local.HeroDatabase
+import com.example.android_avanzado.data.local.LocalDataSource
+import com.example.android_avanzado.data.local.LocalDataSourceImpl
 import com.example.android_avanzado.data.remote.RemoteDataSource
 import com.example.android_avanzado.data.remote.RemoteDataSourceImpl
 import com.example.android_avanzado.data.remote.SuperHeroApi
@@ -36,14 +42,32 @@ val dataModule = module {
             .build()
     }
 
-    single<HeroRepository> { HeroRepositoryImpl(get()) }
+    single<HeroRepository> { HeroRepositoryImpl(get(),get()) }
 
     single<RemoteDataSource> { RemoteDataSourceImpl(get()) }
 
+    single<LocalDataSource> { LocalDataSourceImpl(get()) }
+
     single<SuperHeroApi> {
         getSuperHeroApi(get())
+    }
+
+    single {
+        getDataBase(get())
+    }
+
+    single {
+        providesHeroDao(get())
     }
 }
 
 private fun getSuperHeroApi(retrofit: Retrofit) =
     retrofit.create(SuperHeroApi::class.java)
+
+private fun getDataBase(context: Context): HeroDatabase =
+    Room.databaseBuilder(
+        context,
+        HeroDatabase::class.java, "Superhero-db"
+    ).build()
+
+private fun providesHeroDao(db: HeroDatabase): HeroDao = db.heroDao()
