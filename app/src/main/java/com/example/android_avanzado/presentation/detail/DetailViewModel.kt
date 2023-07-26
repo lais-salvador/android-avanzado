@@ -1,7 +1,6 @@
 package com.example.android_avanzado.presentation.detail
 
 import android.content.Context
-import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +9,7 @@ import com.example.android_avanzado.R
 import com.example.android_avanzado.domain.model.HeroModel
 import com.example.android_avanzado.domain.model.LocationModel
 import com.example.android_avanzado.domain.usecase.GetHeroDetailByIdUseCase
-import com.example.android_avanzado.domain.usecase.GetLastLocationByIdUseCase
+import com.example.android_avanzado.domain.usecase.GetLastHeroLocationByIdUseCase
 import com.keepcoding.androidavanzado.domain.usecase.GetDistanceFromHeroUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +19,7 @@ import kotlinx.coroutines.withContext
 class DetailViewModel(
     private val context: Context,
     private val getHeroDetailByIdUseCase: GetHeroDetailByIdUseCase,
-    private val getLastLocationByIdUseCase: GetLastLocationByIdUseCase,
+    private val getLastHeroLocationByIdUseCase: GetLastHeroLocationByIdUseCase,
     private val getDistanceFromHeroUseCase: GetDistanceFromHeroUseCase
 ): ViewModel() {
 
@@ -35,7 +34,7 @@ class DetailViewModel(
 
     fun getData(id: String){
         getHeroDetailById(id)
-        getLastLocationById(id)
+        getLastHeroLocationById(id)
     }
 
     private fun getHeroDetailById(id: String) = viewModelScope.launch {
@@ -47,9 +46,9 @@ class DetailViewModel(
         }catch (_:Throwable){ }
     }
 
-    private fun getLastLocationById(id: String) = viewModelScope.launch {
+    private fun getLastHeroLocationById(id: String) = viewModelScope.launch {
         val result = withContext(Dispatchers.IO) {
-            getLastLocationByIdUseCase.invoke(id)
+            getLastHeroLocationByIdUseCase.invoke(id)
         }
         heroLocation = result
         showLocation()

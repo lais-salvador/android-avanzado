@@ -7,5 +7,5 @@ import com.example.android_avanzado.data.remote.dto.SearchDto
 
 class RemoteDataSourceImpl(private val superHeroApi: SuperHeroApi): RemoteDataSource {
     override suspend fun getHeroList(): List<HeroDto> = superHeroApi.getHeroList(SearchDto())
-    override suspend fun getLocationList(id: String): List<LocationDto> = superHeroApi.getLocationList(HeroIdDto(id))
+    override suspend fun getHeroLocationList(id: String): List<LocationDto> = superHeroApi.getHeroLocationList(HeroIdDto(id))
 }

@@ -10,6 +10,3 @@ data class LocationDto (
     @Json(name = "hero") val hero: HeroIdDto?
 )
 
-data class HeroIdDto(
-    @Json(name = "id") val id: String
-)

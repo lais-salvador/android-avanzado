@@ -1,6 +1,5 @@
 package com.example.android_avanzado.data
 
-import com.example.android_avanzado.data.local.HeroDao
 import com.example.android_avanzado.data.local.LocalDataSource
 import com.example.android_avanzado.data.mappers.toHeroLocal
 import com.example.android_avanzado.data.mappers.toHeroModel
@@ -35,7 +34,7 @@ class HeroRepositoryImpl(
     }
 
     override suspend fun getHeroDetailById(id: String): HeroModel = localDataSource.getHeroDetailById(id).toHeroModel()
-    override suspend fun getLocationList(id: String): List<LocationModel> = remoteDataSource.getLocationList(id).map {
+    override suspend fun getHeroLocationList(id: String): List<LocationModel> = remoteDataSource.getHeroLocationList(id).map {
         it.toLocationModel()
     }
 
