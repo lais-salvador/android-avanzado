@@ -10,6 +10,6 @@ val presentationModule = module {
     viewModel{ ListViewModel(get(),get()) }
     viewModelOf(::ListViewModel)
 
-    viewModel{ DetailViewModel(get(), get())}
+    viewModel{ DetailViewModel(get(), get(), get(), get())}
     viewModelOf(::DetailViewModel)
 }

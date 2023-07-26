@@ -1,7 +1,7 @@
 package com.example.android_avanzado.domain_usecase
 
 import com.example.android_avanzado.domain.model.LocationModel
-import com.keepcoding.androidavanzado.domain.usecase.GetDistanceFroHeroUseCase
+import com.keepcoding.androidavanzado.domain.usecase.GetDistanceFromHeroUseCase
 import junit.framework.TestCase.assertEquals
 import org.junit.Test
 
@@ -10,7 +10,7 @@ class GetDistanceFromHeroUseCaseTest {
 
     @Test
     fun `test distance between points`(){
-        val useCase = GetDistanceFroHeroUseCase()
+        val useCase = GetDistanceFromHeroUseCase()
         val newYork = LocationModel(40.748817, -73.985428)
         val losAngeles = LocationModel(34.052235, -118.243683)
 

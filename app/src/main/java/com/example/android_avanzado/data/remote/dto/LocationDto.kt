@@ -1,7 +1,6 @@
 package com.example.android_avanzado.data.remote.dto
 
 import com.squareup.moshi.Json
-import java.util.Date
 
 data class LocationDto (
     @Json(name = "id") val id: String?,

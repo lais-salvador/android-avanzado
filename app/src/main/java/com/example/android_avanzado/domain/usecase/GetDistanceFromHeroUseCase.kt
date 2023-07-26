@@ -7,15 +7,15 @@ import kotlin.math.pow
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class GetDistanceFroHeroUseCase {
+class GetDistanceFromHeroUseCase {
     private val EARTH_RADIUS: Int = 6371
 
     fun invoke(loc1: LocationModel, loc2: LocationModel): Double {
 
-        val lat1 = Math.toRadians(loc1.latitud)
-        val lon1 = Math.toRadians(loc1.longitud)
-        val lat2 = Math.toRadians(loc2.latitud)
-        val lon2 = Math.toRadians(loc2.longitud)
+        val lat1 = Math.toRadians(loc1.latitude)
+        val lon1 = Math.toRadians(loc1.longitude)
+        val lat2 = Math.toRadians(loc2.latitude)
+        val lon2 = Math.toRadians(loc2.longitude)
 
         val dLat = lat2 - lat1
         val dLon = lon2 - lon1
