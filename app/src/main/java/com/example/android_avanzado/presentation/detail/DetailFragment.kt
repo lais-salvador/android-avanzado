@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.android_avanzado.databinding.ItemDetailBinding
 import com.example.android_avanzado.domain.model.HeroModel
+import com.example.android_avanzado.domain.model.LocationModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailFragment : Fragment() {
@@ -29,14 +30,23 @@ class DetailFragment : Fragment() {
         detailViewModel.heroModel.observe(viewLifecycleOwner) { hero ->
             setUpViews(hero)
         }
-        detailViewModel.getHeroDetailById(args.heroId)
+        detailViewModel.location.observe(viewLifecycleOwner) { location ->
+            setUpLocation(location)
+        }
+        detailViewModel.getData(args.heroId)
     }
 
-    private fun setUpViews(hero: HeroModel) {
-        binding.tvName.text = hero.name
-        binding.tvDescription.text = hero.description
-        Glide.with(binding.root.context)
+    private fun setUpViews(hero: HeroModel) = binding.run {
+        tvName.text = hero.name
+        tvDescription.text = hero.description
+        Glide.with(root.context)
             .load(hero.photoUrl)
-            .into(binding.ivHero)
+            .into(ivHero)
     }
+
+    private fun setUpLocation(location: LocationModel) = binding.run {
+        tvLongitude.text= "${location.longitud.toString()} ${location.latitud.toString()}"
+    }
+
+
 }

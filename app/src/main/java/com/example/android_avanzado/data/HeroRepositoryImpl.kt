@@ -4,9 +4,11 @@ import com.example.android_avanzado.data.local.HeroDao
 import com.example.android_avanzado.data.local.LocalDataSource
 import com.example.android_avanzado.data.mappers.toHeroLocal
 import com.example.android_avanzado.data.mappers.toHeroModel
+import com.example.android_avanzado.data.mappers.toLocationModel
 import com.example.android_avanzado.data.remote.RemoteDataSource
 import com.example.android_avanzado.data.remote.dto.HeroDto
 import com.example.android_avanzado.domain.model.HeroModel
+import com.example.android_avanzado.domain.model.LocationModel
 
 class HeroRepositoryImpl(
     private val remoteDataSource: RemoteDataSource,
@@ -33,6 +35,9 @@ class HeroRepositoryImpl(
     }
 
     override suspend fun getHeroDetailById(id: String): HeroModel = localDataSource.getHeroDetailById(id).toHeroModel()
+    override suspend fun getLocationList(id: String): List<LocationModel> = remoteDataSource.getLocationList(id).map {
+        it.toLocationModel()
+    }
 
 
 }
